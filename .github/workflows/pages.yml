@@ -1,0 +1,58 @@
+name: Pubblicazione del sito
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    env:
+      SITE_DIRECTORY: ${{ runner.temp }}/atlantemanzoni
+    steps:
+      - name: Lettura dei sorgenti
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Configurazione di Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
+      - name: Verifica dei moduli
+        run: |
+          for file in js/*.js; do
+            node --check "$file"
+          done
+      - name: Preparazione dei file statici
+        run: |
+          mkdir -p "$SITE_DIRECTORY/data"
+          cp index.html favicon.svg "$SITE_DIRECTORY/"
+          cp -R css js fonts "$SITE_DIRECTORY/"
+          cp data/atlante_manzoni.geojson "$SITE_DIRECTORY/data/"
+      - name: Caricamento del sito
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: ${{ env.SITE_DIRECTORY }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Pubblicazione su Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346

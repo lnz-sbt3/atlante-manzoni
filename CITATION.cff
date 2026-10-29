@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Per citare il software AtlanteManzoni, utilizzare questi metadati."
+type: software
+title: AtlanteManzoni
+version: 1.0.0
+date-released: 2026-10-29
+repository-code: "https://github.com/lnz-sbt3/atlante-manzoni"
+url: "https://lnz-sbt3.github.io/atlante-manzoni/"
+authors:
+  - family-names: Sabatino
+    given-names: Lorenzo
+    affiliation: "Università di Bologna, FICLIT"
+    orcid: "https://orcid.org/0009-0007-1496-722X"
+abstract: "Interfaccia web per esplorare le illustrazioni della Quarantana per luoghi, capitoli e personaggi."
+license: MIT
+keywords:
+  - Alessandro Manzoni
+  - Quarantana
+  - illustrazioni
+  - visualizzazione dei dati

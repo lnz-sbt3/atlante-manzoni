@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atlante Manzoni</title>
+  <meta name="description" content="Le 225 illustrazioni della Quarantana (1840–42) dei Promessi Sposi, da sfogliare per luoghi, capitoli e personaggi.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/cormorant-garamond-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/alegreya-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/atlante.css">
+</head>
+<body data-layout="luoghi">
+
+  <a class="skip-link" href="#board">Vai alle tavole</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <h1><button id="btn-home" class="brand-title" aria-label="Atlante Manzoni: torna alla vista iniziale">Atlante Manzoni</button></h1>
+      <p class="brand-sub">Le illustrazioni della Quarantana, 1840–42</p>
+    </div>
+
+    <nav class="layouts" aria-label="Come disporre le tavole">
+      <button data-layout="luoghi" aria-pressed="true">Luoghi</button>
+      <button data-layout="capitoli" aria-pressed="false">Capitoli</button>
+      <button data-layout="personaggi" aria-pressed="false">Personaggi</button>
+    </nav>
+
+    <div class="tools">
+      <button id="btn-cloud" class="tool-btn" aria-expanded="false" aria-controls="cloud">Temi e indici</button>
+      <button id="btn-read" class="tool-btn tool-primary">Sfoglia dall'inizio</button>
+    </div>
+  </header>
+
+  <section id="cloud" class="cloud" aria-label="Temi, luoghi del racconto e incisori" hidden>
+    <div id="cloud-tabs" class="cloud-tabs" role="tablist"></div>
+    <div id="cloud-words" class="cloud-words"></div>
+  </section>
+
+  <main id="board" class="board" aria-label="Il tavolo delle tavole">
+    <div id="world" class="world">
+      <div id="cards" class="cards"></div>
+      <div id="labels" class="labels"></div>
+    </div>
+
+    <div id="filter-chip" class="filter-chip" aria-live="polite" hidden></div>
+    <div id="card-tip" class="card-tip" hidden></div>
+
+    <aside id="chars" class="chars" aria-labelledby="chars-title" hidden>
+      <h2 id="chars-title" class="chars-title">Personaggi</h2>
+      <p id="chars-note" class="chars-note"></p>
+      <label class="chars-search">
+        <span class="visually-hidden">Cerca un personaggio</span>
+        <input id="chars-search" type="search" placeholder="Cerca un personaggio" autocomplete="off">
+      </label>
+      <ul id="chars-list" class="chars-list"></ul>
+    </aside>
+
+    <div class="zoom" role="group" aria-label="Ingrandimento del tavolo">
+      <button id="zoom-in" aria-label="Avvicina">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+      <button id="zoom-out" aria-label="Allontana">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+      <button id="zoom-fit" aria-label="Mostra tutto il tavolo">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    </div>
+  </main>
+
+  <section id="album" class="album" role="dialog" aria-modal="true" aria-label="Album" hidden></section>
+  <section id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Ingrandimento dell'incisione" hidden></section>
+
+  <footer class="rail">
+    <p class="rail-label">Capitoli</p>
+    <svg id="rail-svg" class="rail-svg" role="group" aria-label="Binario dei capitoli: scegli un capitolo per aprirne la prima tavola"></svg>
+    <div id="rail-tip" class="rail-tip" hidden></div>
+    <div class="credits">
+      <p>Immagini e metadati: <a href="https://dlrc.ficlit.unibo.it" target="_blank" rel="noopener">DL FICLIT, Università di Bologna</a></p>
+      <p>Parte di <a href="https://projects.dharc.unibo.it/leggomanzoni/" target="_blank" rel="noopener">Leggo Manzoni</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
